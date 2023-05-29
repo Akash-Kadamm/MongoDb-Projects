@@ -1,5 +1,6 @@
 package com.mongodb.SpringbootMongodbRestApi.entity;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -24,16 +25,17 @@ public class Employee {
     @Id
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "User First name should not be empty or null")
     @Size(max = 100)
     @Indexed(unique = true)
     private String firstName;
 
-    @NotEmpty
+    @NotEmpty(message = "User Last name should not be empty or null")
     private String lastName;
 
-    @NotBlank
+    @NotBlank(message = "User Email should not be empty or null")
     @Size(max = 100)
+    @Email(message = "Email should be valid")
     @Indexed(unique = true)
     private String emailId;
 
