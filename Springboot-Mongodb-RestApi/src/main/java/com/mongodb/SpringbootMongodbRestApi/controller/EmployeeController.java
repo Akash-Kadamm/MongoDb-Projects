@@ -38,19 +38,24 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/{employeeId}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable  long employeeId) {
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable long employeeId) {
         return new ResponseEntity<>(employeeService.getEmployeeById(employeeId), HttpStatus.OK);
     }
 
     @PutMapping("/updateEmployee/{employeeId}")
-    public ResponseEntity<String> updateEmployees(@PathVariable long employeeId,@RequestBody Employee employee) {
-        return new ResponseEntity<>(employeeService.UpdateEmployee(employeeId, employee),HttpStatus.OK);
+    public ResponseEntity<String> updateEmployees(@PathVariable long employeeId, @RequestBody Employee employee) {
+        return new ResponseEntity<>(employeeService.UpdateEmployee(employeeId, employee), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteEmployee/{employeeId}")
     public ResponseEntity<String> deleteEmployee(@PathVariable long employeeId) {
-        return new ResponseEntity<>(employeeService.DeleteEmployee(employeeId),HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.DeleteEmployee(employeeId), HttpStatus.OK);
     }
 
+
+    @GetMapping("/getByName/{employeeName}")
+    public ResponseEntity<Employee> getEmployeeByName(@PathVariable String employeeName) {
+        return new ResponseEntity<>(employeeService.getEmployeeByFirstName(employeeName), HttpStatus.OK);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.mongodb.SpringbootMongodbRestApi.entity;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 import lombok.*;
@@ -27,6 +28,8 @@ public class Employee {
     @Size(max = 100)
     @Indexed(unique = true)
     private String firstName;
+
+    @NotEmpty
     private String lastName;
 
     @NotBlank
