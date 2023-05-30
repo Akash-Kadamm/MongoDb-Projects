@@ -1,5 +1,6 @@
 package com.mongodb.SpringbootMongodbRestApi.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -17,6 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Schema(description = "Employee Model Information")
 public class Employee {
 
     @Transient
@@ -28,15 +30,18 @@ public class Employee {
     @NotBlank(message = "User First name should not be empty or null")
     @Size(max = 100)
     @Indexed(unique = true)
+    @Schema(description = "User first name")
     private String firstName;
 
     @NotEmpty(message = "User Last name should not be empty or null")
+    @Schema(description = "User last name")
     private String lastName;
 
     @NotBlank(message = "User Email should not be empty or null")
     @Size(max = 100)
     @Email(message = "Email should be valid")
     @Indexed(unique = true)
+    @Schema(description = "User email address")
     private String emailId;
 
 }

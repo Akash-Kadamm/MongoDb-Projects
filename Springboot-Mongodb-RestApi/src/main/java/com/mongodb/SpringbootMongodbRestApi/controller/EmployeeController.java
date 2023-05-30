@@ -5,6 +5,9 @@ import com.mongodb.SpringbootMongodbRestApi.exception.ResourceNotFoundException;
 import com.mongodb.SpringbootMongodbRestApi.repository.EmployeeRepository;
 import com.mongodb.SpringbootMongodbRestApi.service.EmployeeService;
 import com.mongodb.SpringbootMongodbRestApi.service.SequenceGeneratorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,10 @@ import java.util.Map;
 import java.util.Objects;
 
 @RestController
+@Tag(
+        name = "Employee Management System",
+        description = "The system"
+)
 @CrossOrigin("*")
 @RequestMapping(value = "/api/v1")
 public class EmployeeController {
@@ -26,11 +33,20 @@ public class EmployeeController {
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
 
+
     @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
 
+    @Operation(
+            summary ="Create New Employee resource",
+            description = "Create a new employee and save into mongodb database"
+    )
+    @ApiResponse(
+            description = "Create Employee resource return 201 CREATED",
+            responseCode = "201"
+    )
     @PostMapping("/employees")
     public ResponseEntity<String> createEmployee(@Valid @RequestBody Employee employee) {
         employee.setId(sequenceGeneratorService.generateSequence(Employee.SEQUENCE_NAME));
